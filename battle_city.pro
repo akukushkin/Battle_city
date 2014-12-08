@@ -17,7 +17,8 @@ SOURCES += main.cpp\
     gamemanager.cpp \
     tank.cpp \
     field.cpp \
-    ai.cpp
+    ai.cpp \
+    bullet.cpp
 
 HEADERS  += mainwindow.h \
     field.h \

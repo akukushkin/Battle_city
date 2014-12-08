@@ -1,15 +1,18 @@
-/*#ifndef BULLET_H
+#ifndef BULLET_H
 #define BULLET_H
-#include <unistd.h>
-class Bullet{
+
+#include <QGraphicsRectItem>
+#include <QObject>
+
+class Bullet: public QObject, public QGraphicsRectItem {
+    Q_OBJECT
 private:
-    size_t speed;
-    size_t damage;
     size_t direction;
-    size_t x;
-    size_t y;
 public:
+    Bullet();
+    Bullet(size_t _direction);
+public slots:
     void move();
 };
 
-#endif // BULLET_H*/
+#endif // BULLET_H
