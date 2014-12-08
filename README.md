@@ -1,3 +1,3 @@
 Battle_city
 ===========
-Выгружайте коммит Moving tank. Daniel's work. Для своих работ создавайте ветки.
+Выгружайте командой git pull origin master (origin-удаленный репозиторий, master-ветка).
