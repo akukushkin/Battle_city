@@ -1,43 +1,42 @@
-#include <bullet.h>
-
+#include "bullet.h"
+#include <QTimer>
 #include <QGraphicsScene>
-#include <QPainter>
-#include <QStyleOption>
 
-#include <math.h>
+#include <QDebug>
 
-Bullet::Bullet()
-    : speed(0), damage(0), direction(0),
-      x(0), y(0), color(qrand() % 256, qrand() % 256, qrand() % 256)
-{}
+Bullet::Bullet() {}
 
-Bullet::Bullet(qreal _speed, qreal _damage, qreal _direction,
-               qreal _x, qreal _y, QColor _color)
-    : speed(_speed), damage(_damage), direction(_direction),
-      x(_x), y(_y), color(_color)
-{}
-
-QRectF Bullet::boundingRect()
+Bullet::Bullet(size_t _direction): direction(_direction)
 {
-    qreal adjust = 0.5;
-    return QRectF(-5 - adjust, -5 - adjust,
-                  10 + adjust, 10 + adjust);
+    setRect(0, 0, 10, 10);
+
+    QTimer * timer = new QTimer();
+    connect(timer, SIGNAL(timeout()), this, SLOT(move()));
+
+    timer->start(50);
 }
 
-QPainterPath Bullet::shape()
+void Bullet::move()
 {
+    switch (direction) {
+    case 0:
+        setPos(x(), y() + 10);
+        break;
+    case 1:
+        setPos(x() - 10, y());
+        break;
+    case 2:
+        setPos(x(), y() - 10);
+        break;
+    case 3:
+        setPos(x() + 10, y());
+        break;
+    }
 
-}
-
-void Tank::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
-{
-    painter->setBrush(color);
-    painter->drawEllipse(-5, -5, 10, 10);
-
-    QPainterPath path(QPointF(0, 20));
-    path.cubicTo(-5, 22, -5, 22, 0, 25);
-    path.cubicTo(5, 27, 5, 32, 0, 30);
-    path.cubicTo(-5, 32, -5, 42, 0, 35);
-    painter->setBrush(Qt::NoBrush);
-    painter->drawPath(path);
+    if (pos().y() < 0 || pos().y() > scene()->height() ||
+            pos().x() < 0 || pos().x() > scene()->width()) {
+        scene()->removeItem(this);
+        delete this;
+        qDebug() << "Bullet deleted";
+    }
 }
