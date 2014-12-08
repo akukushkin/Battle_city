@@ -15,6 +15,7 @@ Tank::Tank(size_t _x, size_t _y)
 #include <QTimer>
 #include <QDebug>
 #include <QKeyEvent>
+#include "bullet.h"
 
 Tank::Tank()
     : angle(0), speed(0), tankDirection(0),
@@ -84,6 +85,12 @@ void Tank::keyPressEvent(QKeyEvent *event)
        advance(1);
    else if(event->key() == Qt::Key_Right)
        advance(3);
+   else if(event->key() == Qt::Key_Space)
+   {
+       Bullet* bullet = new Bullet(angle);
+       bullet->setPos(x(), y());
+       scene()->addItem(bullet);
+   }
 }
 //! [3]
 
