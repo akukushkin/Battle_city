@@ -28,3 +28,5 @@ HEADERS  += mainwindow.h \
     ai.h
 
 FORMS    += mainwindow.ui
+
+QT += widgets
