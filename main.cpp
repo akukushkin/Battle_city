@@ -3,11 +3,13 @@
 #include <math.h>
 #include <QGraphicsView>
 #include "tank.h"
+
 #define WIDHT_SCENE 800
 #define HEIGHT_SCENE 600
 
 static const int TankCount = 1;
 
+//! [0]
 int main(int argc, char **argv)
 {
     QApplication app(argc, argv);
@@ -31,3 +33,4 @@ int main(int argc, char **argv)
 
     return app.exec();
 }
+//! [6]

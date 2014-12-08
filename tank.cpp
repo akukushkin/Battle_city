@@ -1,11 +1,11 @@
 #include "tank.h"
 #include <math.h>
 
-Tank::Tank(size_t _x, size_t _y):x(_x),y(_y)
+Tank::Tank(size_t _x, size_t _y)
 {
       speed=1;
       angle = 0;
-      setPos(x, y);
+      setPos(_x, _y);
 //      healthPoint=100;
 }
 
@@ -96,25 +96,25 @@ void Tank::advance(int r)
 
     qDebug() << "Going to the run " << r;
 
-    if(y + 20*dy <= -300 || r == 0)//(x == 20 && y == -20)
+    if(y() + 20*dy <= 0 || r == 0)//(x == 20 && y == -20)
     {
         dx = 0;
         dy = 1;
         this->angle = 2;
     }
-    else if(x + 20*dx >= 300 || r == 1)//(x == 20 && y == 20)
+    else if(x() + 20*dx >= 800 || r == 1)//(x == 20 && y == 20)
     {
         dy = 0;
         dx = -1;
         this->angle = 3;
     }
-    else if(y + 20*dy >= 250 || r == 2)//(x == -20 && y == 20)
+    else if(y() + 20*dy >= 600 || r == 2)//(x == -20 && y == 20)
     {
         dx = 0;
         dy = -1;
         this->angle = 0;
     }
-    else if(x + 20*dx <= -250 || r == 3)//(x == -20 && y == -20)
+    else if(x() + 20*dx <= 0 || r == 3)//(x == -20 && y == -20)
     {
         dx = 1;
         dy = 0;
@@ -125,9 +125,7 @@ void Tank::advance(int r)
 
     while(counter < 20)
     {
-        x += dx;
-        y += dy;
-        setPos(x, y);
+        setPos(x() + dx, y() + dy);
         counter++;
     }
 }

@@ -2,7 +2,7 @@
 #define TANK_H
 
 #include <unistd.h>
-#include <QGraphicsItem>
+#include <QGraphicsRectItem>
 
 class Tank : public QGraphicsRectItem
 {
@@ -11,13 +11,7 @@ private:
     qreal speed;
     qreal tankDirection;
     QColor color;
-    int x;
-    int y;
 public:
-    size_t getX() {return x;}
-    size_t getY() {return y;}
-    void setX(size_t x) {this->x = x;}
-    void setY(size_t y) {this->y = y;}
     Tank();
     Tank(size_t _x, size_t _y);
 
