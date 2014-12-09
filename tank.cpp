@@ -85,8 +85,9 @@ void Tank::keyPressEvent(QKeyEvent *event)
        advance(1);
    else if(event->key() == Qt::Key_Right)
        advance(3);
-   else if(event->key() == Qt::Key_Space) {
-       Bullet* bullet = new Bullet(tankDirection);
+   else if(event->key() == Qt::Key_Space)
+   {
+       Bullet* bullet = new Bullet(angle);
        bullet->setPos(x(), y());
        scene()->addItem(bullet);
    }
@@ -96,35 +97,38 @@ void Tank::keyPressEvent(QKeyEvent *event)
 //! [4]
 void Tank::advance(int r)
 {
-    static int dx = 1;
+    static int dx = 0;
     static int dy = 0;
     int counter = 0;
 
-    qDebug() << "Going to the run " << r;
-
-    if(y() + 20*dy <= 0 || r == 0)//(x == 20 && y == -20)
+    if((y() + 20) <= 600 && r == 0)
     {
         dx = 0;
         dy = 1;
         this->angle = 2;
     }
-    else if(x() + 20*dx >= 800 || r == 1)//(x == 20 && y == 20)
+    else if(x() - 20 >= 0 && r == 1)
     {
         dy = 0;
         dx = -1;
         this->angle = 3;
     }
-    else if(y() + 20*dy >= 600 || r == 2)//(x == -20 && y == 20)
+    else if(y() - 20 >= 0 && r == 2)
     {
         dx = 0;
         dy = -1;
         this->angle = 0;
     }
-    else if(x() + 20*dx <= 0 || r == 3)//(x == -20 && y == -20)
+    else if(x() + 20 <= 800 && r == 3)
     {
         dx = 1;
         dy = 0;
         this->angle = 1;
+    }
+    else
+    {
+        dx = 0;
+        dy = 0;
     }
 
     setRotation(90*this->angle);
@@ -136,3 +140,4 @@ void Tank::advance(int r)
     }
 }
 //! [11]
+
