@@ -20,16 +20,16 @@ void Bullet::move()
 {
     switch (direction) {
     case 0:
-        setPos(x(), y() + 10);
-        break;
-    case 1:
-        setPos(x() - 10, y());
-        break;
-    case 2:
         setPos(x(), y() - 10);
         break;
-    case 3:
+    case 1:
         setPos(x() + 10, y());
+        break;
+    case 2:
+        setPos(x(), y() + 10);
+        break;
+    case 3:
+        setPos(x() - 10, y());
         break;
     }
 
