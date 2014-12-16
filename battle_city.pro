@@ -18,7 +18,9 @@ SOURCES += main.cpp\
     tank.cpp \
     field.cpp \
     ai.cpp \
-    bullet.cpp
+    bullet.cpp \
+    element_field.cpp \
+    kirpich.cpp
 
 HEADERS  += mainwindow.h \
     field.h \
@@ -26,8 +28,14 @@ HEADERS  += mainwindow.h \
     gamemanager.h \
     tank.h \
     player.h \
-    ai.h
+    ai.h \
+    element_field.h \
+    kirpich.h \
+    basic_element.h
 
 FORMS    += mainwindow.ui
 
 QT += widgets
+
+RESOURCES += \
+    res.qrc

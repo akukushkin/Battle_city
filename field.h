@@ -1,16 +1,21 @@
-/*#ifndef FIELD_H
+#ifndef FIELD_H
 #define FIELD_H
 #include <unistd.h>
-class Field {
+#include <basic_element.h>
+#include <vector>
+#include <QObject>
+class Field : public QObject{
+Q_OBJECT
 private:
-    size_t** matrix;
-    size_t h;
-    size_t w;
+    std::vector<BasicElement*> matrix;
+    int h;
+    int w;
 public:
-    void set(size_t x, size_t y, size_t typeObject);
-    size_t get(size_t x, size_t y);
-    void delete_ceil(size_t x, size_t y);
     Field();
-    ~Field();
+signals:
+    void obj_delete();
+public slots:
+    void checked_map(int x, int y);
+    void checked_sten(int x, int y,int* temp);
 };
-#endif // FIELD_H*/
+#endif // FIELD_H

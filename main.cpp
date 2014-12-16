@@ -3,20 +3,25 @@
 #include <math.h>
 #include <QGraphicsView>
 #include "tank.h"
+#include "field.h"
 
-#define WIDHT_SCENE 800
+#define WIDHT_SCENE 600
 #define HEIGHT_SCENE 600
 
 static const int TankCount = 1;
-
+QGraphicsScene *scene;
+Field* field;
 //! [0]
 int main(int argc, char **argv)
 {
     QApplication app(argc, argv);
-    QGraphicsScene *scene = new QGraphicsScene();
+    scene = new QGraphicsScene();
+    scene->setBackgroundBrush(QPixmap(":/images/1.jpg"));
+    field = new Field();
     Tank *tank = new Tank();
-    tank->setRect(0, 0, 100, 100);
+    tank->setRect(0, 0, 50, 50);
     scene->addItem(tank);
+
 
     tank->setFlag(QGraphicsItem::ItemIsFocusable);
     tank->setFocus();
@@ -29,7 +34,7 @@ int main(int argc, char **argv)
     view->setFixedSize(WIDHT_SCENE, HEIGHT_SCENE);
     scene->setSceneRect(0, 0, WIDHT_SCENE, HEIGHT_SCENE);
 
-    tank->setPos(view->width()/2, view->height() - tank->rect().height());
+    tank->setPos(175, view->height() - tank->rect().height()/2);
 
     return app.exec();
 }

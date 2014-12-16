@@ -1,8 +1,10 @@
 #include "tank.h"
 #include <math.h>
-
-Tank::Tank(size_t _x, size_t _y)
+#include "field.h"
+extern Field* field;
+Tank::Tank(size_t _x, size_t _y) : QObject()
 {
+
       speed=1;
       angle = 0;
       setPos(_x, _y);
@@ -18,61 +20,17 @@ Tank::Tank(size_t _x, size_t _y)
 #include "bullet.h"
 
 Tank::Tank()
-    : angle(0), speed(0), tankDirection(0),
-      color(qrand() % 256, qrand() % 256, qrand() % 256)
+    : QObject(),angle(0), speed(0), tankDirection(0)
 {
     setRotation(0);
 }
 
-QRectF Tank::boundingRect() const
-{
-    qreal adjust = 0.5;
-    return QRectF(-18 - adjust, -22 - adjust,
-                  36 + adjust, 60 + adjust);
-}
-//! [1]
-
-//! [2]
-QPainterPath Tank::shape() const
-{
-    QPainterPath path;
-    path.addRect(-10, -20, 20, 40);
-    return path;
-}
-//! [2]
-
-//! [3]
 void Tank::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
     // Body
-    painter->setBrush(color);
-    painter->drawEllipse(-10, -20, 20, 40);
 
-    // Eyes
-    painter->setBrush(Qt::white);
-    painter->drawEllipse(-10, -17, 8, 8);
-    painter->drawEllipse(2, -17, 8, 8);
+        painter->drawPixmap(0,0,50,50,QPixmap(":/images/tank.png"));
 
-    // Nose
-    painter->setBrush(Qt::black);
-    painter->drawEllipse(QRectF(-2, -22, 4, 4));
-
-    // Pupils
-    painter->drawEllipse(QRectF(-8.0 + tankDirection, -17, 4, 4));
-    painter->drawEllipse(QRectF(4.0 + tankDirection, -17, 4, 4));
-
-    // Ears
-    painter->setBrush(scene()->collidingItems(this).isEmpty() ? Qt::darkYellow : Qt::red);
-    painter->drawEllipse(-17, -12, 16, 16);
-    painter->drawEllipse(1, -12, 16, 16);
-
-    // Tail
-    QPainterPath path(QPointF(0, 20));
-    path.cubicTo(-5, 22, -5, 22, 0, 25);
-    path.cubicTo(5, 27, 5, 32, 0, 30);
-    path.cubicTo(-5, 32, -5, 42, 0, 35);
-    painter->setBrush(Qt::NoBrush);
-    painter->drawPath(path);
 }
 
 void Tank::keyPressEvent(QKeyEvent *event)
@@ -89,7 +47,10 @@ void Tank::keyPressEvent(QKeyEvent *event)
    {
        Bullet* bullet = new Bullet(angle);
        bullet->setPos(x(), y());
+       bullet->setRotation(90*this->angle);
        scene()->addItem(bullet);
+       connect(bullet,SIGNAL(position_bullet(int,int)),field,SLOT(checked_map(int,int)));
+       connect(field,SIGNAL(obj_delete()),bullet,SLOT(bullet_delete()));
    }
 }
 //! [3]
@@ -97,29 +58,30 @@ void Tank::keyPressEvent(QKeyEvent *event)
 //! [4]
 void Tank::advance(int r)
 {
+     connect(this,SIGNAL(position_tank(int,int,int*)),field,SLOT(checked_sten(int,int,int*)));
     static int dx = 0;
     static int dy = 0;
     int counter = 0;
 
-    if((y() + 20) <= 600 && r == 0)
+    if((y()) < 600 && r == 0)
     {
         dx = 0;
         dy = 1;
         this->angle = 2;
     }
-    else if(x() - 20 >= 0 && r == 1)
+    else if((x()) > 0 && r == 1)
     {
         dy = 0;
         dx = -1;
         this->angle = 3;
     }
-    else if(y() - 20 >= 0 && r == 2)
+    else if(y()> 0 && r == 2)
     {
         dx = 0;
         dy = -1;
         this->angle = 0;
     }
-    else if(x() + 20 <= 800 && r == 3)
+    else if(x() < 600 && r == 3)
     {
         dx = 1;
         dy = 0;
@@ -132,12 +94,20 @@ void Tank::advance(int r)
     }
 
     setRotation(90*this->angle);
-
-    while(counter < 20)
+    int* temp;
+    temp = new int(1);
+    while(counter < 25)
     {
+        emit this->position_tank(x()+dx,y()+dy, temp);
+        qDebug() << *temp;
+        if (*temp){
         setPos(x() + dx, y() + dy);
         counter++;
+        } else {
+            return;
+        }
     }
 }
+
 //! [11]
 

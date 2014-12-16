@@ -8,9 +8,9 @@ Bullet::Bullet() {}
 
 Bullet::Bullet(size_t _direction): direction(_direction)
 {
-    setRect(0, 0, 10, 10);
+    setPixmap(QPixmap(":/images/bullet.png"));
 
-    QTimer * timer = new QTimer();
+    timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
 
     timer->start(50);
@@ -32,6 +32,7 @@ void Bullet::move()
         setPos(x() - 10, y());
         break;
     }
+    emit this->position_bullet(this->x(),this->y());
 
     if (pos().y() < 0 || pos().y() > scene()->height() ||
             pos().x() < 0 || pos().x() > scene()->width()) {
@@ -40,3 +41,14 @@ void Bullet::move()
         qDebug() << "Bullet deleted";
     }
 }
+
+void Bullet::bullet_delete()
+{
+    //scene()->removeItem(this);
+    //disconnect(timer, SIGNAL(timeout()), this, SLOT(move()));
+    //disconnect(this,SIGNAL(position_bullet(int,int)),this,SLOT(move()));
+    //scene()->removeItem(this);
+    //delete this;
+    qDebug() << "Bullet deleted!";
+}
+
