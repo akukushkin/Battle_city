@@ -15,10 +15,6 @@ public:
     Tank();
     Tank(size_t _x, size_t _y);
 
-    QRectF boundingRect() const;
-    QPainterPath shape() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-               QWidget *widget);
     void keyPressEvent(QKeyEvent *event);
 
 protected:

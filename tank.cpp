@@ -24,57 +24,6 @@ Tank::Tank()
     setRotation(0);
 }
 
-QRectF Tank::boundingRect() const
-{
-    qreal adjust = 0.5;
-    return QRectF(-18 - adjust, -22 - adjust,
-                  36 + adjust, 60 + adjust);
-}
-//! [1]
-
-//! [2]
-QPainterPath Tank::shape() const
-{
-    QPainterPath path;
-    path.addRect(-10, -20, 20, 40);
-    return path;
-}
-//! [2]
-
-//! [3]
-void Tank::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
-{
-    // Body
-    painter->setBrush(color);
-    painter->drawEllipse(-10, -20, 20, 40);
-
-    // Eyes
-    painter->setBrush(Qt::white);
-    painter->drawEllipse(-10, -17, 8, 8);
-    painter->drawEllipse(2, -17, 8, 8);
-
-    // Nose
-    painter->setBrush(Qt::black);
-    painter->drawEllipse(QRectF(-2, -22, 4, 4));
-
-    // Pupils
-    painter->drawEllipse(QRectF(-8.0 + tankDirection, -17, 4, 4));
-    painter->drawEllipse(QRectF(4.0 + tankDirection, -17, 4, 4));
-
-    // Ears
-    painter->setBrush(scene()->collidingItems(this).isEmpty() ? Qt::darkYellow : Qt::red);
-    painter->drawEllipse(-17, -12, 16, 16);
-    painter->drawEllipse(1, -12, 16, 16);
-
-    // Tail
-    QPainterPath path(QPointF(0, 20));
-    path.cubicTo(-5, 22, -5, 22, 0, 25);
-    path.cubicTo(5, 27, 5, 32, 0, 30);
-    path.cubicTo(-5, 32, -5, 42, 0, 35);
-    painter->setBrush(Qt::NoBrush);
-    painter->drawPath(path);
-}
-
 void Tank::keyPressEvent(QKeyEvent *event)
 {
    if(event->key() == Qt::Key_Up)
