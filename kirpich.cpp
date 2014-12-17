@@ -4,9 +4,6 @@
 
 #include <QDebug>
 
-
-
-
 KirpichField::KirpichField(int i, int j)
 {
     setPos(j*ELEMENT,i*ELEMENT);

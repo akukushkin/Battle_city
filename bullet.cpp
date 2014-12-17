@@ -1,6 +1,8 @@
 #include "bullet.h"
 #include <QTimer>
 #include <QGraphicsScene>
+#include "kirpich.h"
+#include <typeinfo>
 
 #include <QDebug>
 
@@ -18,6 +20,19 @@ Bullet::Bullet(size_t _direction): direction(_direction)
 
 void Bullet::move()
 {
+    // if bullet collies with block or enemy tank, destroy both
+    QList<QGraphicsItem *> colliding_items = collidingItems();
+    for (int i = 0, n = colliding_items.size(); i < n; ++i) {
+        if (typeid(*(colliding_items[i])) == typeid(KirpichField)) {
+            scene()->removeItem(colliding_items[i]);
+            scene()->removeItem(this);
+            delete colliding_items[i];
+            delete this;
+            return;
+        }
+    }
+
+    // move bullet
     switch (direction) {
     case 0:
         setPos(x(), y() - 10);
@@ -32,23 +47,12 @@ void Bullet::move()
         setPos(x() - 10, y());
         break;
     }
-    emit this->position_bullet(this->x(),this->y());
 
+    // if bullet go out abroad, destroy it
     if (pos().y() < 0 || pos().y() > scene()->height() ||
             pos().x() < 0 || pos().x() > scene()->width()) {
         scene()->removeItem(this);
         delete this;
-        qDebug() << "Bullet deleted";
     }
-}
-
-void Bullet::bullet_delete()
-{
-    //scene()->removeItem(this);
-    //disconnect(timer, SIGNAL(timeout()), this, SLOT(move()));
-    //disconnect(this,SIGNAL(position_bullet(int,int)),this,SLOT(move()));
-    //scene()->removeItem(this);
-    //delete this;
-    qDebug() << "Bullet deleted!";
 }
 

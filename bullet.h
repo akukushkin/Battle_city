@@ -14,9 +14,6 @@ public:
     Bullet(size_t _direction);
 public slots:
     void move();
-    void bullet_delete();
-signals:
-    void position_bullet(int x, int y);
 };
 
 #endif // BULLET_H

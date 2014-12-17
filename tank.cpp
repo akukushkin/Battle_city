@@ -49,8 +49,6 @@ void Tank::keyPressEvent(QKeyEvent *event)
        bullet->setPos(x(), y());
        bullet->setRotation(90*this->angle);
        scene()->addItem(bullet);
-       connect(bullet,SIGNAL(position_bullet(int,int)),field,SLOT(checked_map(int,int)));
-       connect(field,SIGNAL(obj_delete()),bullet,SLOT(bullet_delete()));
    }
 }
 //! [3]
@@ -58,7 +56,7 @@ void Tank::keyPressEvent(QKeyEvent *event)
 //! [4]
 void Tank::advance(int r)
 {
-     connect(this,SIGNAL(position_tank(int,int,int*)),field,SLOT(checked_sten(int,int,int*)));
+    connect(this, SIGNAL(position_tank(int,int,int*)), field, SLOT(checked_sten(int,int,int*)));
     static int dx = 0;
     static int dy = 0;
     int counter = 0;
