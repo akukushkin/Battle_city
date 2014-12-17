@@ -46,7 +46,9 @@ void Tank::keyPressEvent(QKeyEvent *event)
    else if(event->key() == Qt::Key_Space)
    {
        Bullet* bullet = new Bullet(angle);
-       bullet->setPos(x(), y());
+       int positionBulletX = x() + this->rect().width()/2 - bullet->pixmap().width()/2;
+       int positionBulletY = y() + this->rect().height()/2 - bullet->pixmap().height()/2;
+       bullet->setPos(positionBulletX, positionBulletY);
        bullet->setRotation(90*this->angle);
        scene()->addItem(bullet);
    }
