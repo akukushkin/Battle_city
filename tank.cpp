@@ -26,53 +26,54 @@ Tank::Tank()
 
 void Tank::keyPressEvent(QKeyEvent *event)
 {
-   if(event->key() == Qt::Key_Up)
-       advance(2);
-   else if(event->key() == Qt::Key_Down)
-       advance(0);
-   else if(event->key() == Qt::Key_Left)
-       advance(1);
-   else if(event->key() == Qt::Key_Right)
-       advance(3);
+   if(event->key() == Qt::Key_Up || event->key() == Qt::Key_Down || event->key() == Qt::Key_Left || event->key() == Qt::Key_Right)
+       advance(event->key());
    else if(event->key() == Qt::Key_Space)
    {
        Bullet* bullet = new Bullet(angle);
-       bullet->setPos(x(), y());
+       bullet->setPos(mapToScene(this->rect().width()/2, this->rect().height()/2));
        scene()->addItem(bullet);
    }
 }
 //! [3]
 
 //! [4]
+void Tank::rotateTank(int angle)
+{
+    this->setTransformOriginPoint(QPoint(this->rect().width()/2,this->rect().height()/2));
+    setRotation(angle);
+}
+
 void Tank::advance(int r)
 {
     static int dx = 0;
     static int dy = 0;
+    int f = 0;
     int counter = 0;
 
-    if((y() + 20) <= 600 && r == 0)
+    if((y() + 20) <= 600 && r == Qt::Key_Down)
     {
         dx = 0;
         dy = 1;
-        this->angle = 2;
+        f = 2;
     }
-    else if(x() - 20 >= 0 && r == 1)
+    else if(x() - 20 >= 0 && r == Qt::Key_Left)
     {
         dy = 0;
         dx = -1;
-        this->angle = 3;
+        f = 3;
     }
-    else if(y() - 20 >= 0 && r == 2)
+    else if(y() - 20 >= 0 && r == Qt::Key_Up)
     {
         dx = 0;
         dy = -1;
-        this->angle = 0;
+        f = 0;
     }
-    else if(x() + 20 <= 800 && r == 3)
+    else if(x() + 20 <= 800 && r == Qt::Key_Right)
     {
         dx = 1;
         dy = 0;
-        this->angle = 1;
+        f = 1;
     }
     else
     {
@@ -80,13 +81,18 @@ void Tank::advance(int r)
         dy = 0;
     }
 
-    setRotation(90*this->angle);
-
-    while(counter < 20)
+    if(f == this->angle)
     {
-        setPos(x() + dx, y() + dy);
-        counter++;
+        while(counter < 20)
+        {
+            setPos(x() + dx, y() + dy);
+            counter++;
+        }
     }
+    else
+        rotateTank(90*f);
+
+    this->angle = f;
 }
 //! [11]
 

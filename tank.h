@@ -18,7 +18,8 @@ public:
     void keyPressEvent(QKeyEvent *event);
 
 protected:
-    void advance(int step);
+    void advance(int key);
+    void rotateTank(int angle);
 };
 #endif
 
