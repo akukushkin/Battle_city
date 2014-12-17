@@ -14,10 +14,8 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    gamemanager.cpp \
     tank.cpp \
     field.cpp \
-    ai.cpp \
     bullet.cpp \
     element_field.cpp \
     kirpich.cpp

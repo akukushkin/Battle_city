@@ -4,8 +4,6 @@
 
 #include <QDebug>
 
-
-
 ElementField::ElementField(int i, int j): x(j), y(i)
 {
     setPos(j*ELEMENT,i*ELEMENT);
