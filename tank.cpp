@@ -1,8 +1,10 @@
 #include "tank.h"
 #include <math.h>
-
-Tank::Tank(size_t _x, size_t _y)
+#include "field.h"
+extern Field* field;
+Tank::Tank(size_t _x, size_t _y) : QObject()
 {
+
       speed=1;
       angle = 0;
       setPos(_x, _y);
@@ -18,58 +20,69 @@ Tank::Tank(size_t _x, size_t _y)
 #include "bullet.h"
 
 Tank::Tank()
-    : angle(0), speed(0), tankDirection(0),
-      color(qrand() % 256, qrand() % 256, qrand() % 256)
+    : QObject(),angle(0), speed(0), tankDirection(0)
 {
     setRotation(0);
 }
 
+void Tank::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
+{
+    // Body
+
+        painter->drawPixmap(0,0,50,50,QPixmap(":/images/tank.png"));
+
+}
+
 void Tank::keyPressEvent(QKeyEvent *event)
 {
-   if(event->key() == Qt::Key_Up || event->key() == Qt::Key_Down || event->key() == Qt::Key_Left || event->key() == Qt::Key_Right)
-       advance(event->key());
+    if(event->key() == Qt::Key_Up || event->key() == Qt::Key_Down || event->key() == Qt::Key_Left || event->key() == Qt::Key_Right)
+           advance(event->key());
    else if(event->key() == Qt::Key_Space)
    {
        Bullet* bullet = new Bullet(angle);
-       bullet->setPos(mapToScene(this->rect().width()/2, this->rect().height()/2));
+       int positionBulletX = x() + this->rect().width()/2 - bullet->pixmap().width()/2;
+       int positionBulletY = y() + this->rect().height()/2 - bullet->pixmap().height()/2;
+       bullet->setPos(positionBulletX, positionBulletY);
+       bullet->setRotation(90*this->angle);
        scene()->addItem(bullet);
    }
 }
 //! [3]
 
-//! [4]
 void Tank::rotateTank(int angle)
 {
     this->setTransformOriginPoint(QPoint(this->rect().width()/2,this->rect().height()/2));
     setRotation(angle);
 }
 
+//! [4]
 void Tank::advance(int r)
 {
+    connect(this, SIGNAL(position_tank(int,int,int*)), field, SLOT(checked_sten(int,int,int*)));
     static int dx = 0;
     static int dy = 0;
     int f = 0;
     int counter = 0;
 
-    if((y() + 20) <= 600 && r == Qt::Key_Down)
+    if((y()) < 600 && r == Qt::Key_Down)
     {
         dx = 0;
         dy = 1;
         f = 2;
     }
-    else if(x() - 20 >= 0 && r == Qt::Key_Left)
+    else if((x()) > 0 && r == Qt::Key_Left)
     {
         dy = 0;
         dx = -1;
         f = 3;
     }
-    else if(y() - 20 >= 0 && r == Qt::Key_Up)
+    else if(y()> 0 && r == Qt::Key_Up)
     {
         dx = 0;
         dy = -1;
         f = 0;
     }
-    else if(x() + 20 <= 800 && r == Qt::Key_Right)
+    else if(x() < 600 && r == Qt::Key_Right)
     {
         dx = 1;
         dy = 0;
@@ -81,12 +94,21 @@ void Tank::advance(int r)
         dy = 0;
     }
 
+    int* temp;
+    temp = new int(1);
+
     if(f == this->angle)
     {
-        while(counter < 20)
+        while(counter < 25)
         {
+            emit this->position_tank(x()+dx,y()+dy, temp);
+            qDebug() << *temp;
+            if (*temp){
             setPos(x() + dx, y() + dy);
             counter++;
+            } else {
+                return;
+            }
         }
     }
     else
@@ -94,5 +116,6 @@ void Tank::advance(int r)
 
     this->angle = f;
 }
+
 //! [11]
 
