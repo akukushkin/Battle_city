@@ -3,27 +3,23 @@
 
 #include <unistd.h>
 #include <QGraphicsRectItem>
-#include <QObject>
-class Tank : public QObject ,public QGraphicsRectItem
+
+class Tank : public QGraphicsRectItem
 {
-    Q_OBJECT
 private:
     size_t angle;
     qreal speed;
     qreal tankDirection;
+    QColor color;
 public:
     Tank();
     Tank(size_t _x, size_t _y);
 
-
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-               QWidget *widget);
     void keyPressEvent(QKeyEvent *event);
 
 protected:
-    void advance(int step);
-signals:
-    int position_tank(int x, int y, int* temp);
+    void advance(int key);
+    void rotateTank(int angle);
 };
 #endif
 
