@@ -23,5 +23,6 @@ protected:
     void advance(int controlButton);
     void rotateTank(int direction);
 };
+
 #endif
 

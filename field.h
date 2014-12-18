@@ -4,6 +4,7 @@
 #include <basic_element.h>
 #include <vector>
 #include <QObject>
+
 class Field : public QObject{
 Q_OBJECT
 private:
@@ -18,4 +19,5 @@ public slots:
     void checked_map(int x, int y);
     void checked_sten(int x, int y,int* temp);
 };
+
 #endif // FIELD_H

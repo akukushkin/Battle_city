@@ -1,15 +1,11 @@
-﻿#include "tank.h"
-#include <math.h>
-#include "field.h"
-#include <QGraphicsScene>
+﻿#include <QGraphicsScene>
 #include <QPainter>
-#include <QStyleOption>
-#include <QTimer>
-#include <QDebug>
 #include <QKeyEvent>
 #include "bullet.h"
+#include "tank.h"
+#include "field.h"
 
-extern Field* field;
+#include <QDebug>
 
 Tank::Tank()
     : QObject(), direction(0), speed(0)

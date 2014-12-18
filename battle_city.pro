@@ -27,7 +27,8 @@ HEADERS  += mainwindow.h \
     player.h \
     ai.h \
     kirpich.h \
-    basic_element.h
+    basic_element.h \
+    CommandField.h
 
 FORMS    += mainwindow.ui
 
