@@ -1,4 +1,4 @@
-#include "tank.h"
+﻿#include "tank.h"
 #include <math.h>
 #include "field.h"
 #include <QGraphicsScene>
@@ -34,14 +34,34 @@ void Tank::keyPressEvent(QKeyEvent *event) {
     if(event->key() == Qt::Key_Up || event->key() == Qt::Key_Down || event->key() == Qt::Key_Left || event->key() == Qt::Key_Right)
            advance(event->key());
    else if(event->key() == Qt::Key_Space)
-   {
-       Bullet* bullet = new Bullet(direction);
-       int positionBulletX = x() + this->rect().width()/2 - bullet->pixmap().width()/2;
-       int positionBulletY = y() + this->rect().height()/2 - bullet->pixmap().height()/2;
-       bullet->setPos(positionBulletX, positionBulletY);
-       bullet->setRotation(90*this->direction);
-       scene()->addItem(bullet);
-   }
+    shot();
+}
+
+void Tank::shot() {
+    Bullet* bullet = new Bullet(direction);
+    int positionBulletX, positionBulletY;
+
+    switch (direction) {
+    case 2:
+        positionBulletX = x() + this->rect().center().x() + bullet->rect().width()/2;
+        positionBulletY = y() + this->rect().height() + bullet->rect().height();
+        break;
+    case 3:
+        positionBulletX = x() - 2*bullet->rect().width();
+        positionBulletY = y() + this->rect().center().y() + bullet->rect().width()/2;
+        break;
+    case 0:
+        positionBulletX = x() + this->rect().center().x() - bullet->rect().width()/2;
+        positionBulletY = y() - bullet->rect().height();
+        break;
+    case 1:
+        positionBulletX = x() + this->rect().width() + bullet->rect().height();
+        positionBulletY = y() + this->rect().center().y() - bullet->rect().width()/2;
+        break;
+    }
+
+    bullet->setPos(positionBulletX, positionBulletY);
+    scene()->addItem(bullet);
 }
 
 void Tank::rotateTank(int angle) {
@@ -49,11 +69,11 @@ void Tank::rotateTank(int angle) {
     setRotation(angle);
 }
 
-void Tank::advance(int r) {
+void Tank::advance(int controlButton) {
     int dx = 0;
     int dy = 0;
 
-    switch (r) {
+    switch (controlButton) {
     case Qt::Key_Down:
         if (this->direction != 2) {
             this->direction = 2;

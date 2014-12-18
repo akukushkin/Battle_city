@@ -3,6 +3,7 @@
 #include <QGraphicsScene>
 #include "kirpich.h"
 #include <typeinfo>
+#include <QPainter>
 
 #include <QDebug>
 
@@ -10,12 +11,18 @@ Bullet::Bullet() {}
 
 Bullet::Bullet(size_t _direction): direction(_direction)
 {
-    setPixmap(QPixmap(":/images/bullet.png"));
+    this->setRotation(90*direction);
+    setRect(0, 0, 9, 20);
 
     timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
 
     timer->start(15);
+}
+
+void Bullet::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
+{
+    painter->drawPixmap(0, 0, 9, 20, QPixmap(":/images/bullet.png"));
 }
 
 void Bullet::move()

@@ -4,7 +4,8 @@
 #include <QGraphicsRectItem>
 #include <QObject>
 #include <QDebug>
-class Bullet: public QObject, public QGraphicsPixmapItem {
+
+class Bullet: public QObject, public QGraphicsRectItem {
     Q_OBJECT
 private:
     QTimer* timer;
@@ -12,6 +13,8 @@ private:
 public:
     Bullet();
     Bullet(size_t _direction);
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+               QWidget *widget);
 public slots:
     void move();
 };
