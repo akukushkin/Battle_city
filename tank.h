@@ -8,13 +8,11 @@ class Tank : public QObject, public QGraphicsRectItem
 {
     Q_OBJECT
 private:
-    size_t angle;
+    size_t direction;
     qreal speed;
-    qreal tankDirection;
 public:
     Tank();
     Tank(size_t _x, size_t _y);
-
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                QWidget *widget);
@@ -22,9 +20,7 @@ public:
 
 protected:
     void advance(int step);
-    void rotateTank(int angle);
-signals:
-    int position_tank(int x, int y, int* temp);
+    void rotateTank(int direction);
 };
 #endif
 

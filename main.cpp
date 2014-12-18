@@ -34,7 +34,7 @@ int main(int argc, char **argv)
     view->setFixedSize(WIDHT_SCENE, HEIGHT_SCENE);
     scene->setSceneRect(0, 0, WIDHT_SCENE, HEIGHT_SCENE);
 
-    tank->setPos(175, view->height() - tank->rect().height()/2);
+    tank->setPos(150, view->height() - tank->rect().height());
 
     return app.exec();
 }

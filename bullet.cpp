@@ -15,7 +15,7 @@ Bullet::Bullet(size_t _direction): direction(_direction)
     timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
 
-    timer->start(50);
+    timer->start(15);
 }
 
 void Bullet::move()
