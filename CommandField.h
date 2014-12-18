@@ -1,0 +1,4 @@
+#ifndef COMMANDFIELD_H
+#define COMMANDFIELD_H
+
+#endif // COMMANDFIELD_H
