@@ -35,14 +35,8 @@ void Tank::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 
 void Tank::keyPressEvent(QKeyEvent *event)
 {
-   if(event->key() == Qt::Key_Up)
-       advance(2);
-   else if(event->key() == Qt::Key_Down)
-       advance(0);
-   else if(event->key() == Qt::Key_Left)
-       advance(1);
-   else if(event->key() == Qt::Key_Right)
-       advance(3);
+    if(event->key() == Qt::Key_Up || event->key() == Qt::Key_Down || event->key() == Qt::Key_Left || event->key() == Qt::Key_Right)
+           advance(event->key());
    else if(event->key() == Qt::Key_Space)
    {
        Bullet* bullet = new Bullet(angle);
@@ -55,37 +49,44 @@ void Tank::keyPressEvent(QKeyEvent *event)
 }
 //! [3]
 
+void Tank::rotateTank(int angle)
+{
+    this->setTransformOriginPoint(QPoint(this->rect().width()/2,this->rect().height()/2));
+    setRotation(angle);
+}
+
 //! [4]
 void Tank::advance(int r)
 {
     connect(this, SIGNAL(position_tank(int,int,int*)), field, SLOT(checked_sten(int,int,int*)));
     static int dx = 0;
     static int dy = 0;
+    int f = 0;
     int counter = 0;
 
-    if((y()) < 600 && r == 0)
+    if((y()) < 600 && r == Qt::Key_Down)
     {
         dx = 0;
         dy = 1;
-        this->angle = 2;
+        f = 2;
     }
-    else if((x()) > 0 && r == 1)
+    else if((x()) > 0 && r == Qt::Key_Left)
     {
         dy = 0;
         dx = -1;
-        this->angle = 3;
+        f = 3;
     }
-    else if(y()> 0 && r == 2)
+    else if(y()> 0 && r == Qt::Key_Up)
     {
         dx = 0;
         dy = -1;
-        this->angle = 0;
+        f = 0;
     }
-    else if(x() < 600 && r == 3)
+    else if(x() < 600 && r == Qt::Key_Right)
     {
         dx = 1;
         dy = 0;
-        this->angle = 1;
+        f = 1;
     }
     else
     {
@@ -93,20 +94,27 @@ void Tank::advance(int r)
         dy = 0;
     }
 
-    setRotation(90*this->angle);
     int* temp;
     temp = new int(1);
-    while(counter < 25)
+
+    if(f == this->angle)
     {
-        emit this->position_tank(x()+dx,y()+dy, temp);
-        qDebug() << *temp;
-        if (*temp){
-        setPos(x() + dx, y() + dy);
-        counter++;
-        } else {
-            return;
+        while(counter < 25)
+        {
+            emit this->position_tank(x()+dx,y()+dy, temp);
+            qDebug() << *temp;
+            if (*temp){
+            setPos(x() + dx, y() + dy);
+            counter++;
+            } else {
+                return;
+            }
         }
     }
+    else
+        rotateTank(90*f);
+
+    this->angle = f;
 }
 
 //! [11]

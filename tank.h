@@ -22,6 +22,7 @@ public:
 
 protected:
     void advance(int step);
+    void rotateTank(int angle);
 signals:
     int position_tank(int x, int y, int* temp);
 };
