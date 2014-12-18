@@ -54,52 +54,60 @@ void Tank::rotateTank(int angle)
 
 void Tank::advance(int r)
 {
-    connect(this, SIGNAL(position_tank(int,int,int*)), field, SLOT(checked_sten(int,int,int*)));
     static int dx = 0;
     static int dy = 0;
-    int f = 0;
+
+    switch (r) {
+    case Qt::Key_Down:
+        if (this->angle != 2) {
+            this->angle = 2;
+            rotateTank(this->angle*90);
+            return;
+        } else if (y() < (scene()->height() - this->rect().height())) {
+            dx = 0;
+            dy = 1;
+        } else
+            return;
+        break;
+    case Qt::Key_Left:
+        if (this->angle != 3) {
+            this->angle = 3;
+            rotateTank(this->angle*90);
+            return;
+        } else if (x() > 0) {
+            dx = -1;
+            dy = 0;
+        } else
+            return;
+        break;
+    case Qt::Key_Up:
+        if (this->angle != 0) {
+            this->angle = 0;
+            rotateTank(this->angle*90);
+            return;
+        } else if (y() > 0) {
+            dx = 0;
+            dy = -1;
+        } else
+            return;
+        break;
+    case Qt::Key_Right:
+        if (this->angle != 1) {
+            this->angle = 1;
+            rotateTank(this->angle*90);
+            return;
+        } else if (x() < (scene()->width() - this->rect().width())) {
+            dx = 1;
+            dy = 0;
+        } else
+            return;
+        break;
+    }
+
     int counter = 0;
-
-    if(y() < (scene()->height() - this->rect().height())  && r == Qt::Key_Down)
-    {
-        dx = 0;
-        dy = 1;
-        f = 2;
+    while(counter < this->rect().width()/2) {
+        setPos(x() + dx, y() + dy);
+        counter++;
     }
-    else if((x()) > 0 && r == Qt::Key_Left)
-    {
-        dy = 0;
-        dx = -1;
-        f = 3;
-    }
-    else if(y() > 0 && r == Qt::Key_Up)
-    {
-        dx = 0;
-        dy = -1;
-        f = 0;
-    }
-    else if(x() < (scene()->width() - this->rect().width()) && r == Qt::Key_Right)
-    {
-        dx = 1;
-        dy = 0;
-        f = 1;
-    }
-    else
-    {
-        dx = 0;
-        dy = 0;
-    }
-
-    if (f == this->angle) {
-        qDebug() << f << this->angle;
-        while(counter < 25) {
-            setPos(x() + dx, y() + dy);
-            counter++;
-        }
-    }
-    else
-        rotateTank(90*f);
-
-    this->angle = f;
 }
 
