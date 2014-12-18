@@ -9,7 +9,7 @@
 class KirpichField: public QObject, public BasicElement{
     Q_OBJECT
 public:
-    void abst() {return ;}
+    void info() {qDebug() << "Kirpich";}
     KirpichField(int i, int j);
 };
 

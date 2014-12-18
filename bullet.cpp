@@ -1,45 +1,43 @@
 #include "bullet.h"
-#include <QTimer>
-#include <QGraphicsScene>
 #include "kirpich.h"
-#include <typeinfo>
+#include "metall.h"
+#include "field.h"
+#include <QTimer>
 #include <QPainter>
-
+#include <QGraphicsScene>
+#include <typeinfo>
 #include <QDebug>
-
+extern Field* field;
 Bullet::Bullet() {}
 
 Bullet::Bullet(size_t _direction): direction(_direction)
 {
     this->setRotation(90*direction);
     setRect(0, 0, 9, 20);
-
     timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
 
     timer->start(15);
 }
-
-void Bullet::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
-{
-    painter->drawPixmap(0, 0, 9, 20, QPixmap(":/images/bullet.png"));
+void Bullet::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *){
+painter->drawPixmap(0, 0, 9, 20, QPixmap(":/images/bullet.png"));
 }
-
 void Bullet::move()
 {
-    // if bullet collies with block or enemy tank, destroy both
     QList<QGraphicsItem *> colliding_items = collidingItems();
     for (int i = 0, n = colliding_items.size(); i < n; ++i) {
         if (typeid(*(colliding_items[i])) == typeid(KirpichField)) {
-            scene()->removeItem(colliding_items[i]);
+            field->destroy(dynamic_cast<BasicElement*>(colliding_items[i]));
             scene()->removeItem(this);
-            delete colliding_items[i];
+            delete this;
+            return;
+        } else if (typeid(*(colliding_items[i])) == typeid(MetallField)){
+            scene()->removeItem(this);
             delete this;
             return;
         }
     }
-
-    // move bullet
+    qDebug() << "MOVE!";
     switch (direction) {
     case 0:
         setPos(x(), y() - 10);
@@ -54,12 +52,10 @@ void Bullet::move()
         setPos(x() - 10, y());
         break;
     }
-
-    // if bullet go out abroad, destroy it
-    if (pos().y() < 0 || pos().y() > scene()->height() ||
+    if  ( pos().y() < 0 || pos().y() > scene()->height() ||
             pos().x() < 0 || pos().x() > scene()->width()) {
         scene()->removeItem(this);
         delete this;
+        qDebug() << "Bullet deleted";
     }
-}
-
+ }

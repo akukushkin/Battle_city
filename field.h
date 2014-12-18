@@ -4,20 +4,19 @@
 #include <basic_element.h>
 #include <vector>
 #include <QObject>
-
+#include "tank.h"
 class Field : public QObject{
 Q_OBJECT
 private:
     std::vector<BasicElement*> matrix;
+    std::vector<int> matrixField;
     int h;
     int w;
 public:
     Field();
+    bool check(int m,int k);
+    void destroy(BasicElement* element);
 signals:
     void obj_delete();
-public slots:
-    void checked_map(int x, int y);
-    void checked_sten(int x, int y,int* temp);
 };
-
 #endif // FIELD_H

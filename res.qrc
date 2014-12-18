@@ -8,5 +8,6 @@
         <file>4.png</file>
         <file>tank.png</file>
         <file>bullet.png</file>
+        <file>metall.png</file>
     </qresource>
 </RCC>

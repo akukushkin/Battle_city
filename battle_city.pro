@@ -14,10 +14,14 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
+    gamemanager.cpp \
     tank.cpp \
     field.cpp \
+    ai.cpp \
     bullet.cpp \
-    kirpich.cpp
+    kirpich.cpp \
+    basic_element.cpp \
+    metall.cpp
 
 HEADERS  += mainwindow.h \
     field.h \
@@ -28,7 +32,7 @@ HEADERS  += mainwindow.h \
     ai.h \
     kirpich.h \
     basic_element.h \
-    CommandField.h
+    metall.h
 
 FORMS    += mainwindow.ui
 
