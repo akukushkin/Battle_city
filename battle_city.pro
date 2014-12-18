@@ -17,7 +17,6 @@ SOURCES += main.cpp\
     tank.cpp \
     field.cpp \
     bullet.cpp \
-    element_field.cpp \
     kirpich.cpp
 
 HEADERS  += mainwindow.h \
@@ -27,7 +26,6 @@ HEADERS  += mainwindow.h \
     tank.h \
     player.h \
     ai.h \
-    element_field.h \
     kirpich.h \
     basic_element.h
 

@@ -91,7 +91,6 @@ void Tank::advance(int r)
     }
 
     if (f == this->angle) {
-        qDebug() << f << this->angle;
         while(counter < 25) {
             setPos(x() + dx, y() + dy);
             counter++;

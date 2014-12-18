@@ -1,8 +1,8 @@
 #include "field.h"
-#include "element_field.h"
 #include "kirpich.h"
 #include <QGraphicsScene>
 #include <QDebug>
+
 extern QGraphicsScene *scene;
 int MatrixField[12][12]={{0,0,0,0,0,0,0,0,0,0,0,0},
                         {0,0,0,0,0,0,0,0,0,0,0,0},
@@ -16,6 +16,7 @@ int MatrixField[12][12]={{0,0,0,0,0,0,0,0,0,0,0,0},
                         {0,2,0,0,2,2,2,2,0,0,2,0},
                         {0,2,0,0,2,0,0,2,0,0,2,0},
                         {0,2,0,0,2,0,0,2,0,0,2,0},};
+
 Field::Field(): QObject(), h(12), w(12) {
 
 

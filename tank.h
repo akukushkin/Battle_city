@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <QGraphicsRectItem>
 #include <QObject>
-class Tank : public QObject ,public QGraphicsRectItem
+class Tank : public QObject, public QGraphicsRectItem
 {
     Q_OBJECT
 private:
