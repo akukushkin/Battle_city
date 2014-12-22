@@ -1,0 +1,22 @@
+﻿Build started 17.11.2014 20:48:03.
+     1>Project "C:\tinyxml\tinyxml_lib.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W4 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _VC80_UPGRADE=0x0600 /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"C:\tinyxml\Debugtinyxml\\" /Fd"C:\tinyxml\Debugtinyxml\vc120.pdb" /FR"C:\tinyxml\Debugtinyxml\\" /Gd /TP /analyze- /errorReport:prompt tinystr.cpp tinyxml.cpp tinyxmlerror.cpp tinyxmlparser.cpp
+         tinyxmlparser.cpp
+         tinyxmlerror.cpp
+         tinyxml.cpp
+         tinystr.cpp
+         Generating Code...
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"C:\tinyxml\Debugtinyxml\tinyxml.lib" /NOLOGO C:\tinyxml\Debugtinyxml\tinystr.obj
+         C:\tinyxml\Debugtinyxml\tinyxml.obj
+         C:\tinyxml\Debugtinyxml\tinyxmlerror.obj
+         C:\tinyxml\Debugtinyxml\tinyxmlparser.obj
+         tinyxml_lib.vcxproj -> C:\tinyxml\Debugtinyxml\tinyxml.lib
+       BscMake:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\bscmake.exe /nologo /o"C:\tinyxml\Debugtinyxml\tinyxml.bsc" C:\tinyxml\Debugtinyxml\tinystr.sbr C:\tinyxml\Debugtinyxml\tinyxml.sbr C:\tinyxml\Debugtinyxml\tinyxmlerror.sbr C:\tinyxml\Debugtinyxml\tinyxmlparser.sbr
+     1>Done Building Project "C:\tinyxml\tinyxml_lib.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:05.51

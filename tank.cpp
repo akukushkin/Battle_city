@@ -2,43 +2,10 @@
 #include <math.h>
 #include "field.h"
 #include "kirpich.h"
+#include "gamemanager.h"
 #include <QList>
 #include <QGraphicsItem>
 #include <typeinfo>
-extern Field* field;
-extern int** MatrixField;
-Tank::Tank(size_t _x, size_t _y) : QObject()
-{
-      speed=1;
-      direction = 0;
-      setPos(_x, _y);
-      //      healthPoint=100;
-}
-
-bool Tank::checkPosition()
-{
-    int realX = x()+rect().width()/2;
-    int realY = y()+rect().height()/2;
-
-    int k = realX / rect().width();
-    int m = realY / rect().height();
-    switch (direction) {
-    case 1:
-        k++;
-        break;
-    case 2:
-        m++;
-        break;
-    case 3:
-        k--;
-        break;
-    default:
-        m--;
-        break;
-    }
-    return field->check(k,m);
-}
-
 #include <QGraphicsScene>
 #include <QPainter>
 #include <QStyleOption>
@@ -47,19 +14,9 @@ bool Tank::checkPosition()
 #include <QKeyEvent>
 #include "bullet.h"
 
-Tank::Tank()
-    : QObject(),direction(0), speed(0), tankDirection(0)
-{
-    setRotation(0);
-}
+Tank::Tank() : BaseTank() {}
 
-void Tank::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
-{
-    // Body
-
-        painter->drawPixmap(0,0,50,50,QPixmap(":/images/tank.png"));
-
-}
+Tank::Tank(size_t x, size_t y) : BaseTank(x, y) {}
 
 void Tank::keyPressEvent(QKeyEvent *event)
 {
@@ -69,10 +26,6 @@ void Tank::keyPressEvent(QKeyEvent *event)
    {
       shot();
    }
-}
-void Tank::rotateTank(int angle){
-    this->setTransformOriginPoint(QPoint(this->rect().width()/2,this->rect().height()/2));
-    setRotation(angle);
 }
 
 void Tank::move(int controlButton){
@@ -130,29 +83,4 @@ void Tank::move(int controlButton){
         setPos(x() + rect().width()*dx, y() + rect().height()*dy);
         counter++;
     }
-}
-
-void Tank::shot() {
-    Bullet* bullet = new Bullet(direction);
-    int positionBulletX, positionBulletY;
-    switch (direction) {
-        case 2:
-            positionBulletX = x() + this->rect().center().x() + bullet->rect().width()/2;
-            positionBulletY = y() + this->rect().height() + bullet->rect().height();
-            break;
-        case 3:
-            positionBulletX = x() - 2*bullet->rect().width();
-            positionBulletY = y() + this->rect().center().y() + bullet->rect().width()/2;
-            break;
-        case 0:
-            positionBulletX = x() + this->rect().center().x() - bullet->rect().width()/2;
-            positionBulletY = y() - bullet->rect().height();
-            break;
-        case 1:
-            positionBulletX = x() + this->rect().width() + bullet->rect().height();
-            positionBulletY = y() + this->rect().center().y() - bullet->rect().width()/2;
-            break;
-    }
-    bullet->setPos(positionBulletX, positionBulletY);
-    scene()->addItem(bullet);
 }

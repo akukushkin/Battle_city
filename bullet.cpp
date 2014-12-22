@@ -2,12 +2,13 @@
 #include "kirpich.h"
 #include "metall.h"
 #include "field.h"
+#include "gamemanager.h"
 #include <QTimer>
 #include <QPainter>
 #include <QGraphicsScene>
 #include <typeinfo>
 #include <QDebug>
-extern Field* field;
+extern GameManager* game;
 Bullet::Bullet() {}
 
 Bullet::Bullet(size_t _direction): direction(_direction)
@@ -27,7 +28,7 @@ void Bullet::move()
     QList<QGraphicsItem *> colliding_items = collidingItems();
     for (int i = 0, n = colliding_items.size(); i < n; ++i) {
         if (typeid(*(colliding_items[i])) == typeid(KirpichField)) {
-            field->destroy(dynamic_cast<BasicElement*>(colliding_items[i]));
+            game->callField()->destroy(dynamic_cast<BasicElement*>(colliding_items[i]));
             scene()->removeItem(this);
             delete this;
             return;

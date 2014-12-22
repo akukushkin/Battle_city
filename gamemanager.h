@@ -1,15 +1,18 @@
-/*#ifndef GAMEMANAGER_H
+#ifndef GAMEMANAGER_H
 #define GAMEMANAGER_H
+
+#include "tank.h"
+#include "field.h"
+
 class GameManager {
 private:
     Field* field;
-    Tank* tanks;
+    Tank* playerTank;
 public:
-    void startGame();
-    void monitorGame();
-    void endGame();
-    void destroyTank();
-    GameManager();
+    Field* callField() {return field;}
+    Tank* callPlayerTank() {return playerTank;}
+    GameManager(char* str);
     ~GameManager();
 };
+
 #endif // GAMEMANAGER_H*/

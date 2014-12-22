@@ -13,7 +13,7 @@ private:
     int h;
     int w;
 public:
-    Field();
+    Field(int,int,std::vector<int>);
     bool check(int m,int k);
     void destroy(BasicElement* element);
 signals:

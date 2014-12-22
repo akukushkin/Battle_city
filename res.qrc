@@ -10,4 +10,7 @@
         <file>bullet.png</file>
         <file>metall.png</file>
     </qresource>
+    <qresource prefix="/xml">
+        <file>level1.xml</file>
+    </qresource>
 </RCC>

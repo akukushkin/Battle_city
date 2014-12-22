@@ -4,26 +4,18 @@
 #include <unistd.h>
 #include <QGraphicsRectItem>
 #include <QObject>
-class Tank : public QObject ,public QGraphicsRectItem
+#include "basetank.h"
+
+class Tank : public BaseTank
 {
     Q_OBJECT
-private:
-    size_t direction;
-    qreal speed;
-    qreal tankDirection;
 public:
-    Tank();
-    Tank(size_t _x, size_t _y);
-    bool checkPosition();
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-               QWidget *widget);
+    explicit Tank();
+    explicit Tank(size_t x, size_t y);
     void keyPressEvent(QKeyEvent *event);
-
 protected:
-    void move(int step);
-    void rotateTank(int angle);
-    void shot();
-
+    void move(int direction);
 };
+
 #endif
 

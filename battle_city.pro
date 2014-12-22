@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
-
+QT       += xml
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = battle_city
@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     bullet.cpp \
     kirpich.cpp \
     basic_element.cpp \
-    metall.cpp
+    metall.cpp \
+    basetank.cpp
 
 HEADERS  += mainwindow.h \
     field.h \
@@ -32,7 +33,8 @@ HEADERS  += mainwindow.h \
     ai.h \
     kirpich.h \
     basic_element.h \
-    metall.h
+    metall.h \
+    basetank.h
 
 FORMS    += mainwindow.ui
 
@@ -40,3 +42,5 @@ QT += widgets
 
 RESOURCES += \
     res.qrc
+
+unix|win32: LIBS += -ltinyxml

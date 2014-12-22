@@ -4,17 +4,17 @@
 #include <QObject>
 #include <QDebug>
 class Bullet: public QObject, public QGraphicsRectItem {
-Q_OBJECT
+    Q_OBJECT
 private:
-QTimer* timer;
-size_t direction;
+    QTimer* timer;
+    size_t direction;
 public:
-Bullet();
-Bullet(size_t _direction);
-void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-QWidget *widget);
-public slots:
-void move();
+    Bullet();
+    Bullet(size_t _direction);
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+    QWidget *widget);
+    public slots:
+    void move();
 };
 
 #endif // BULLET_H
