@@ -18,6 +18,11 @@ Tank::Tank() : BaseTank() {}
 
 Tank::Tank(size_t x, size_t y) : BaseTank(x, y) {}
 
+Tank::~Tank()
+{
+    delete this;
+}
+
 void Tank::keyPressEvent(QKeyEvent *event)
 {
    if(event->key() == Qt::Key_Up || event->key() == Qt::Key_Down || event->key() == Qt::Key_Left || event->key() == Qt::Key_Right)
@@ -77,9 +82,10 @@ void Tank::move(int controlButton){
                 return;
         break;
     }
-        int counter = 0;
 
-        if (!this->checkPosition()){
+    int counter = 0;
+
+    if (!this->checkPosition()) {
         setPos(x() + rect().width()*dx, y() + rect().height()*dy);
         counter++;
     }

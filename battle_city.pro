@@ -17,24 +17,27 @@ SOURCES += main.cpp\
     gamemanager.cpp \
     tank.cpp \
     field.cpp \
-    ai.cpp \
     bullet.cpp \
     kirpich.cpp \
     basic_element.cpp \
     metall.cpp \
-    basetank.cpp
+    basetank.cpp \
+    itankmoveable.cpp \
+    simplemove.cpp \
+    objects.cpp
 
 HEADERS  += mainwindow.h \
     field.h \
     bullet.h \
     gamemanager.h \
     tank.h \
-    player.h \
-    ai.h \
     kirpich.h \
     basic_element.h \
     metall.h \
-    basetank.h
+    basetank.h \
+    itankmoveable.h \
+    simplemove.h \
+    objects.h
 
 FORMS    += mainwindow.ui
 

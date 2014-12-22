@@ -8,6 +8,7 @@
 #include <QGraphicsScene>
 #include <typeinfo>
 #include <QDebug>
+
 extern GameManager* game;
 Bullet::Bullet() {}
 

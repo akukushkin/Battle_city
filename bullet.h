@@ -1,8 +1,10 @@
 #ifndef BULLET_H
 #define BULLET_H
+
 #include <QGraphicsRectItem>
 #include <QObject>
 #include <QDebug>
+
 class Bullet: public QObject, public QGraphicsRectItem {
     Q_OBJECT
 private:

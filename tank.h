@@ -12,6 +12,8 @@ class Tank : public BaseTank
 public:
     explicit Tank();
     explicit Tank(size_t x, size_t y);
+    ~Tank();
+
     void keyPressEvent(QKeyEvent *event);
 protected:
     void move(int direction);

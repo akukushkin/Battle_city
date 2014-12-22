@@ -6,16 +6,33 @@ extern GameManager* game;
 BaseTank::BaseTank() :
     QObject(),
     direction(0),
-    speed(0)
+    speed(0),
+    moveable(NULL)
 {
 }
 
 BaseTank::BaseTank(size_t x, size_t y):
     QObject(),
     direction(0),
-    speed(0)
+    speed(0),
+    moveable(NULL)
 {
     setPos(x, y);
+}
+
+BaseTank::~BaseTank()
+{
+    delete this;
+}
+
+size_t BaseTank::getDirection() const
+{
+    return direction;
+}
+
+void BaseTank::setDirection(size_t new_direction)
+{
+    direction = new_direction;
 }
 
 bool BaseTank::checkPosition()
@@ -46,6 +63,11 @@ void BaseTank::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidge
 {
     // Body
     painter->drawPixmap(0,0,50,50,QPixmap(":/images/tank.png"));
+}
+
+void BaseTank::move(int direction)
+{
+    moveable->move(direction);
 }
 
 void BaseTank::rotateTank(int angle)

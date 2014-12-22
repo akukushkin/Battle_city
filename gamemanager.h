@@ -2,7 +2,6 @@
 #define GAMEMANAGER_H
 
 #include "field.h"
-#include "tank.h"
 
 class GameManager {
 private:
