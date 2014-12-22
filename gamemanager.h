@@ -1,8 +1,8 @@
 #ifndef GAMEMANAGER_H
 #define GAMEMANAGER_H
 
-#include "tank.h"
 #include "field.h"
+#include "tank.h"
 
 class GameManager {
 private:

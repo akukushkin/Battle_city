@@ -6,10 +6,7 @@
 #include <QGraphicsScene>
 #include <QPainter>
 #include <unistd.h>
-#include "gamemanager.h"
 #include "bullet.h"
-
-extern GameManager* game;
 
 class BaseTank : public QObject, public QGraphicsRectItem
 {
@@ -17,8 +14,7 @@ class BaseTank : public QObject, public QGraphicsRectItem
 public:
     explicit BaseTank();
     explicit BaseTank(size_t x, size_t y);
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-               QWidget *widget);
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 protected:
     size_t direction;
     qreal speed;

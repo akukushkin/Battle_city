@@ -1,4 +1,7 @@
 #include "basetank.h"
+#include "gamemanager.h"
+
+extern GameManager* game;
 
 BaseTank::BaseTank() :
     QObject(),
