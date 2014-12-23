@@ -14,9 +14,15 @@
 #include <QKeyEvent>
 #include "bullet.h"
 
-Tank::Tank() : BaseTank() {}
+Tank::Tank() : BaseTank()
+{
+    moveable = new SimpleMove(this);
+}
 
-Tank::Tank(size_t x, size_t y) : BaseTank(x, y) {}
+Tank::Tank(size_t x, size_t y) : BaseTank(x, y)
+{
+    moveable = new SimpleMove(this);
+}
 
 Tank::~Tank()
 {
@@ -31,62 +37,4 @@ void Tank::keyPressEvent(QKeyEvent *event)
    {
       shot();
    }
-}
-
-void Tank::move(int controlButton){
-    int dx = 0;
-    int dy = 0;
-    switch (controlButton) {
-        case Qt::Key_Down:
-        if (this->direction != 2) {
-             this->direction = 2;
-             rotateTank(this->direction*90);
-            return;
-        } else if (y() < (scene()->height() - this->rect().height())) {
-            dx = 0;
-            dy = 1;
-        } else
-            return;
-            break;
-        case Qt::Key_Left:
-             if (this->direction != 3) {
-                  this->direction = 3;
-                  rotateTank(this->direction*90);
-                  return;
-        } else if (x() > 0) {
-                   dx = -1;
-                   dy = 0;
-        } else
-                   return;
-                   break;
-        case Qt::Key_Up:
-            if (this->direction != 0) {
-                this->direction = 0;
-                rotateTank(this->direction*90);
-                return;
-        } else if (y() > 0) {
-                dx = 0;
-                dy = -1;
-        } else
-                return;
-                break;
-        case Qt::Key_Right:
-                if (this->direction != 1) {
-                    this->direction = 1;
-                    rotateTank(this->direction*90);
-                    return;
-        } else if (x() < (scene()->width() - this->rect().width())) {
-                     dx = 1;
-                    dy = 0;
-        } else
-                return;
-        break;
-    }
-
-    int counter = 0;
-
-    if (!this->checkPosition()) {
-        setPos(x() + rect().width()*dx, y() + rect().height()*dy);
-        counter++;
-    }
 }

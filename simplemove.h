@@ -9,8 +9,9 @@ class SimpleMove : public ITankMoveable
 {
 public:
     explicit SimpleMove(BaseTank *tank = NULL);
+    ~SimpleMove();
 
-    void move(int direction);
+    void move(int newDirection);
 };
 
 #endif // SIMPLEMOVE_H

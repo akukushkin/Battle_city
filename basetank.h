@@ -22,7 +22,7 @@ public:
     size_t getDirection() const;
     void setDirection(size_t new_direction);
 
-    void rotateTank(int angle);
+    void rotateTank(size_t newDirection);
     void shot();
     bool checkPosition();
 
@@ -35,7 +35,7 @@ protected:
     ITankMoveable* moveable;
 
     // Moving tank
-    void virtual move(int direction);
+    void move(int direction);
 };
 
 #endif // BASETANK_H

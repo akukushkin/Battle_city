@@ -5,6 +5,7 @@
 #include <QGraphicsRectItem>
 #include <QObject>
 #include "basetank.h"
+#include "simplemove.h"
 
 class Tank : public BaseTank
 {
@@ -15,8 +16,6 @@ public:
     ~Tank();
 
     void keyPressEvent(QKeyEvent *event);
-protected:
-    void move(int direction);
 };
 
 #endif

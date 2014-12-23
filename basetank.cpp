@@ -27,12 +27,12 @@ BaseTank::~BaseTank()
 
 size_t BaseTank::getDirection() const
 {
-    return direction;
+    return this->direction;
 }
 
 void BaseTank::setDirection(size_t new_direction)
 {
-    direction = new_direction;
+    this->direction = new_direction;
 }
 
 bool BaseTank::checkPosition()
@@ -70,10 +70,11 @@ void BaseTank::move(int direction)
     moveable->move(direction);
 }
 
-void BaseTank::rotateTank(int angle)
+void BaseTank::rotateTank(size_t newDirection)
 {
+    this->direction = newDirection;
     this->setTransformOriginPoint(QPoint(this->rect().width()/2,this->rect().height()/2));
-    setRotation(angle);
+    setRotation(newDirection*90);
 }
 
 void BaseTank::shot()

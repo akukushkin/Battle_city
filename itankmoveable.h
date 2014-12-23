@@ -9,8 +9,9 @@ class ITankMoveable
 {
 public:
     explicit ITankMoveable(BaseTank* tank = NULL);
+    virtual ~ITankMoveable();
 
-    void virtual move(int direction) = 0;
+    void virtual move(int newDirection) = 0;
 protected:
     BaseTank* tank;
 };
