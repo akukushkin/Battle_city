@@ -1,18 +1,5 @@
 #include "tank.h"
-#include <math.h>
-#include "field.h"
-#include "kirpich.h"
-#include "gamemanager.h"
-#include <QList>
-#include <QGraphicsItem>
-#include <typeinfo>
-#include <QGraphicsScene>
-#include <QPainter>
-#include <QStyleOption>
-#include <QTimer>
-#include <QDebug>
 #include <QKeyEvent>
-#include "bullet.h"
 
 Tank::Tank() : BaseTank()
 {
