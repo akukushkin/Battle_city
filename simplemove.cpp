@@ -6,7 +6,6 @@ SimpleMove::SimpleMove(BaseTank *tank) : ITankMoveable(tank)
 
 SimpleMove::~SimpleMove()
 {
-    delete this;
 }
 
 void SimpleMove::move(int newDirection)

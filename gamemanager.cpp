@@ -3,9 +3,11 @@
 #include <QGraphicsView>
 #include <QtXml>
 #include <vector>
+
 QGraphicsScene* scene;
 QGraphicsView* view;
 int ElementSize;
+
 GameManager::GameManager(char* str){
     scene = new QGraphicsScene();
     scene->setBackgroundBrush(QPixmap(":/images/1.jpg"));
@@ -63,10 +65,17 @@ GameManager::GameManager(char* str){
     playerTank->setFlag(QGraphicsItem::ItemIsFocusable);
     playerTank->setFocus();
     for(int i=0; i < h;i++)
-         for (int j = 0; j < w;j++)
+         for (int j = 0; j < w;j++){
              if ( matrixField[i+j*w] == 7)
-                 playerTank->setPos(i*ElementSize,j*ElementSize);
+                 playerTank->setPos(i*ElementSize-2*ElementSize,j*ElementSize);
+
+         }
 }
 
 GameManager::~GameManager() {
+    delete field;
+    scene->removeItem(playerTank);
+    delete playerTank;
+    scene->setBackgroundBrush(QPixmap(":/images/white.jpg"));
+    scene->addText("GAME OVER!");
 }

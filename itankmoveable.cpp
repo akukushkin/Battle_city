@@ -6,5 +6,5 @@ ITankMoveable::ITankMoveable(BaseTank* _tank): tank(_tank)
 
 ITankMoveable::~ITankMoveable()
 {
-    delete this;
+    tank = NULL;
 }

@@ -1,13 +1,11 @@
 #ifndef FIELD_H
 #define FIELD_H
-
 #include <unistd.h>
 #include <basic_element.h>
 #include <vector>
 #include <QObject>
 #include "tank.h"
-
-class Field : public QObject {
+class Field : public QObject{
 Q_OBJECT
 private:
     std::vector<BasicElement*> matrix;
@@ -16,10 +14,10 @@ private:
     int h;
 public:
     Field(int,int,std::vector<int>);
+    ~Field();
     bool check(int m,int k);
     void destroy(BasicElement* element);
 signals:
     void obj_delete();
 };
-
 #endif // FIELD_H

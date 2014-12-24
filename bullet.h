@@ -1,9 +1,7 @@
 #ifndef BULLET_H
 #define BULLET_H
-
 #include <QGraphicsRectItem>
 #include <QObject>
-#include <QDebug>
 
 class Bullet: public QObject, public QGraphicsRectItem {
     Q_OBJECT
@@ -15,7 +13,7 @@ public:
     Bullet(size_t _direction);
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     QWidget *widget);
-    public slots:
+public slots:
     void move();
 };
 

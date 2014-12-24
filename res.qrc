@@ -9,6 +9,9 @@
         <file>tank.png</file>
         <file>bullet.png</file>
         <file>metall.png</file>
+        <file>orel.png</file>
+        <file>bonus.png</file>
+        <file>white.png</file>
     </qresource>
     <qresource prefix="/xml">
         <file>level1.xml</file>

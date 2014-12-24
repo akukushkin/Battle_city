@@ -22,7 +22,7 @@ BaseTank::BaseTank(size_t x, size_t y):
 
 BaseTank::~BaseTank()
 {
-    delete this;
+    delete moveable;
 }
 
 size_t BaseTank::getDirection() const

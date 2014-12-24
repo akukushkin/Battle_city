@@ -5,7 +5,7 @@
 #include <QDebug>
 #include "gamemanager.h"
 #include <QtXml>
-
+#include <QTimer>
 static const int TankCount = 1;
 
 GameManager* game;

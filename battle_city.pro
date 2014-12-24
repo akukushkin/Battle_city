@@ -17,14 +17,17 @@ SOURCES += main.cpp\
     gamemanager.cpp \
     tank.cpp \
     field.cpp \
+    ai.cpp \
     bullet.cpp \
     kirpich.cpp \
     basic_element.cpp \
     metall.cpp \
     basetank.cpp \
+    orel.cpp \
+    bonus.cpp \
     itankmoveable.cpp \
-    simplemove.cpp \
-    objects.cpp
+    objects.cpp \
+    simplemove.cpp
 
 HEADERS  += mainwindow.h \
     field.h \
@@ -35,9 +38,11 @@ HEADERS  += mainwindow.h \
     basic_element.h \
     metall.h \
     basetank.h \
+    orel.h \
+    bonus.h \
     itankmoveable.h \
-    simplemove.h \
-    objects.h
+    objects.h \
+    simplemove.h
 
 FORMS    += mainwindow.ui
 
