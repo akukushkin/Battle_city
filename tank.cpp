@@ -1,5 +1,6 @@
 #include "tank.h"
 #include <QKeyEvent>
+#include "simplemove.h"
 
 Tank::Tank() : BaseTank()
 {

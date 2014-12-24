@@ -5,7 +5,6 @@
 #include <QGraphicsRectItem>
 #include <QObject>
 #include "basetank.h"
-#include "simplemove.h"
 
 class Tank : public BaseTank
 {

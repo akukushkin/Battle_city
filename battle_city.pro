@@ -27,7 +27,9 @@ SOURCES += main.cpp\
     bonus.cpp \
     itankmoveable.cpp \
     objects.cpp \
-    simplemove.cpp
+    simplemove.cpp \
+    enemytank.cpp \
+    nomove.cpp
 
 HEADERS  += mainwindow.h \
     field.h \
@@ -42,7 +44,9 @@ HEADERS  += mainwindow.h \
     bonus.h \
     itankmoveable.h \
     objects.h \
-    simplemove.h
+    simplemove.h \
+    enemytank.h \
+    nomove.h
 
 FORMS    += mainwindow.ui
 
