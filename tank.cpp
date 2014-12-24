@@ -17,10 +17,14 @@ Tank::~Tank()
 
 void Tank::keyPressEvent(QKeyEvent *event)
 {
-    if(event->key() == Qt::Key_Up || event->key() == Qt::Key_Down || event->key() == Qt::Key_Left || event->key() == Qt::Key_Right)
-        move(event->key());
-    else if(event->key() == Qt::Key_Space)
-    {
+    if (event->key() == Qt::Key_Up)
+        move(0);
+    else if (event->key() == Qt::Key_Left)
+        move(3);
+    else if (event->key() == Qt::Key_Down)
+        move(2);
+    else if (event->key() == Qt::Key_Right)
+        move(1);
+    else if (event->key() == Qt::Key_Space)
         shot();
-    }
 }

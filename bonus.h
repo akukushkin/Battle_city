@@ -6,6 +6,7 @@
 #include <basic_element.h>
 #define ELEMENT 50
 #include <QDebug>
+
 class BonusField: public QObject, public BasicElement{
     Q_OBJECT
 public:

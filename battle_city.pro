@@ -17,7 +17,6 @@ SOURCES += main.cpp\
     gamemanager.cpp \
     tank.cpp \
     field.cpp \
-    ai.cpp \
     bullet.cpp \
     kirpich.cpp \
     basic_element.cpp \
