@@ -15,8 +15,9 @@ private:
 public:
     Field(int,int,std::vector<int>);
     ~Field();
-    bool check(int m,int k);
+    int check(int m,int k);
     void destroy(BasicElement* element);
+    void destroy(int i, int j);
 signals:
     void obj_delete();
 };

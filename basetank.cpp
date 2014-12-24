@@ -56,7 +56,7 @@ bool BaseTank::checkPosition()
         m--;
         break;
     }
-    return game->callField()->check(k,m);
+    return game->callField()->check(m,k);
 }
 
 void BaseTank::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)

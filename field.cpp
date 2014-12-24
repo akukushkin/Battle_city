@@ -15,51 +15,69 @@ Field::Field(int _w, int _h, std::vector<int> mtr): QObject(), w(_w),h(_h) {
    matrixField = mtr;
    for(int i=0; i < h;i++){
         for (int j = 0; j < w;j++){
-            if (matrixField[i+j*w] == 2){
+            switch(matrixField[i+j*w]){
+            case 2:
                 matrix.push_back(BasicElement::createElement(Kirpich_ID,j,i));
                 scene->addItem(matrix.back());
-                continue;
-            } else if (matrixField[i+j*w] == 3){
+                break;
+            case 3:
                 matrix.push_back(BasicElement::createElement(Metall_ID,j,i));
                 scene->addItem(matrix.back());
-                continue;
-            }  else if (matrixField[i+j*w] == 7){
+                break;
+            case 7:
                 matrix.push_back(BasicElement::createElement(Orel_ID,j,i));
                 scene->addItem(matrix.back());
-                continue;
-            }
+                break;
+            case 8:
+                matrix.push_back(BasicElement::createElement(Bonus_ID,j,i));
+                scene->addItem(matrix.back());
+                break;
+            default:
                 matrix.push_back(NULL);
-        }
-   }
+                break;
+            }
+       }
+    }
 }
 
 Field::~Field()
 {
-    for (int i=0; i < matrix.size(); i++ ){
+    for (unsigned   int i=0; i < matrix.size(); i++ ){
         scene->removeItem(matrix[i]);
         delete matrix[i];
     }
 }
 
-bool Field::check(int m, int k)
+int Field::check(int m, int k)
 {
-    qDebug() << "check";
-    if (matrixField[m+k*w] != 0){
-        return true;
+    if (matrixField[k+m*w] != 0){
+        if (matrixField[k+m*w] == 8){
+            destroy(m,k);
+            return 2;
+        }
+        return 0;
     }
     else
-        return false;
+        return 1;
 }
 
 void Field::destroy(BasicElement* element)
 {
+    qDebug() << element;
     for(int i = 0 ; i < h; i++)
         for (int j = 0; j < w; j++){
             if (matrix[i+j*w] == element){  
+                qDebug() << i << j;
                 scene->removeItem(matrix[i+j*w]);
                 delete matrix[i+j*w];
                 matrix[i+j*w]=NULL;
                 matrixField[j+i*w] = 0;
             }
         }
+}
+void Field::destroy(int i, int j){
+    scene->removeItem(matrix[i+j*w]);
+    delete matrix[i+j*w];
+    matrix[i+j*w]=NULL;
+    matrixField[j+i*w] = 0;
 }

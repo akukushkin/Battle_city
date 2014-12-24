@@ -57,7 +57,7 @@ void SimpleMove::move(int newDirection)
 
     int counter = 0;
 
-    if (!tank->checkPosition()) {
+    if (tank->checkPosition()) {
         tank->setPos(tank->x() + tank->rect().width()*dx, tank->y() + tank->rect().height()*dy);
         counter++;
     }
