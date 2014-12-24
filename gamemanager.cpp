@@ -3,6 +3,7 @@
 #include <QGraphicsView>
 #include <QtXml>
 #include <vector>
+#include "tankfactory.h"
 
 QGraphicsScene* scene;
 QGraphicsView* view;
@@ -16,6 +17,7 @@ GameManager::GameManager(char* str){
     QFile* file = new QFile(str);
     int h;
     int w;
+    EnemyTank* ePlayer = NULL;
     if(file->open(QIODevice::ReadOnly | QIODevice::Text)){
         QXmlStreamReader xml(file);
         while(!xml.atEnd() && !xml.hasError()){
@@ -59,7 +61,7 @@ GameManager::GameManager(char* str){
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->show();
     field = new Field(w,h,matrixField);
-    playerTank = new Tank();
+    playerTank = (Tank*)TankFactory::createTank(hPl);
     playerTank->setRect(0, 0, 50, 50);
     scene->addItem(playerTank);
     playerTank->setFlag(QGraphicsItem::ItemIsFocusable);
@@ -69,13 +71,35 @@ GameManager::GameManager(char* str){
              if ( matrixField[i+j*w] == 7)
                  playerTank->setPos(i*ElementSize-2*ElementSize,j*ElementSize);
 
+             if ( matrixField[i+j*w] == 9)
+             {
+                 matrixField[i+j*w] = 0;
+                 ePlayer = (EnemyTank*)TankFactory::createTank(ePl);
+                 ePlayer->setRect(0, 0, 50, 50);
+                 enemyPlayers.push_back(ePlayer);
+                 scene->addItem(ePlayer);
+                 ePlayer->setPos(i*ElementSize,j*ElementSize);
+             }
          }
 }
 
 GameManager::~GameManager() {
-    delete field;
+    EnemyTank* player = NULL;
     scene->removeItem(playerTank);
     delete playerTank;
+    delete field;
     scene->setBackgroundBrush(QPixmap(":/images/white.jpg"));
     scene->addText("GAME OVER!");
+    while(enemyPlayers.size())
+    {
+        player = enemyPlayers.back();
+        scene->removeItem(player);
+        delete player;
+        enemyPlayers.pop_back();
+    }
+}
+
+void GameManager::destroyEnemyTank(BaseTank *)
+{
+    return;
 }

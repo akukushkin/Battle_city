@@ -40,6 +40,11 @@ void Bullet::move()
             scene()->removeItem(this);
             delete this;
             return;
+        } else if (typeid(*(colliding_items[i])) == typeid(EnemyTank)){
+            game->destroyEnemyTank(dynamic_cast<BaseTank*>(colliding_items[i]));
+            scene()->removeItem(this);
+            delete this;
+            return;
         }
     }
 

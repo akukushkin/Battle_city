@@ -12,6 +12,7 @@
         <file>orel.png</file>
         <file>bonus.png</file>
         <file>white.png</file>
+        <file>enemytank.png</file>
     </qresource>
     <qresource prefix="/xml">
         <file>level1.xml</file>

@@ -28,7 +28,8 @@ SOURCES += main.cpp\
     objects.cpp \
     simplemove.cpp \
     enemytank.cpp \
-    nomove.cpp
+    nomove.cpp \
+    tankfactory.cpp
 
 HEADERS  += mainwindow.h \
     field.h \
@@ -45,7 +46,8 @@ HEADERS  += mainwindow.h \
     objects.h \
     simplemove.h \
     enemytank.h \
-    nomove.h
+    nomove.h \
+    tankfactory.h
 
 FORMS    += mainwindow.ui
 
