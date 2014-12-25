@@ -3,13 +3,12 @@
 #include "boost/random.hpp"
 #include "boost/generator_iterator.hpp"
 #include <ctime>
-#include <QDebug>
 #include <QTimer>
-//extern QTimer* enemyTimer;
+
 using namespace boost;
+
 EnemyTank::EnemyTank() : BaseTank()
 {
-    qDebug() << "CreateEnemy";
     enemyTimer = new QTimer();
     connect(enemyTimer, SIGNAL(timeout()), this, SLOT(randomMove()));
     moveable = new SimpleMove(this);
@@ -24,6 +23,7 @@ EnemyTank::EnemyTank(size_t x, size_t y) : BaseTank(x, y)
 EnemyTank::~EnemyTank()
 {
 }
+
 void EnemyTank::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
     // Body
@@ -32,24 +32,26 @@ void EnemyTank::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidg
 
 void EnemyTank::randomMove()
 {
-      static int i = 0;
-      const int rangeMin = 0;
-      const int rangeMax = 4;
-      typedef boost::uniform_int<> NumberDistribution;
-      typedef boost::mt19937 RandomNumberGenerator;
-      typedef boost::variate_generator<RandomNumberGenerator&,
-                                       NumberDistribution> Generator;
+    static int i = 0;
+    const int rangeMin = 0;
+    const int rangeMax = 4;
+    typedef boost::uniform_int<> NumberDistribution;
+    typedef boost::mt19937 RandomNumberGenerator;
+    typedef boost::variate_generator<RandomNumberGenerator&,
+                                           NumberDistribution> Generator;
 
-      NumberDistribution distribution(rangeMin, rangeMax);
-      RandomNumberGenerator generator;
-      Generator numberGenerator(generator, distribution);
-      generator.seed(std::time(0)+i++);
-      size_t direct = numberGenerator();
-      if (direct == 4){
-          shot();
-          return;
-      }
-      if (this->direction != direct)
+    NumberDistribution distribution(rangeMin, rangeMax);
+    RandomNumberGenerator generator;
+    Generator numberGenerator(generator, distribution);
+    generator.seed(std::time(0)+i++);
+    size_t direct = numberGenerator();
+
+    if (direct == 4){
+        shot();
+        return;
+    }
+
+    if (this->direction != direct)
         move(direct);
-      move(direct);
+    move(direct);
 }

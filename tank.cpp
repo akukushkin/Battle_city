@@ -1,6 +1,7 @@
 #include "tank.h"
 #include <QKeyEvent>
 #include "simplemove.h"
+
 Tank::Tank() : BaseTank()
 {
     moveable = new SimpleMove(this);

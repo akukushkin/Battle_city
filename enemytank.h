@@ -18,6 +18,7 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     ~EnemyTank();
 public slots:
+    // Algorith for enemytank's random moving
     void randomMove();
 
 };

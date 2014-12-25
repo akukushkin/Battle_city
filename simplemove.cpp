@@ -1,5 +1,8 @@
 #include "simplemove.h"
-#include <QDebug>
+#include "nomove.h"
+#include "supermove.h"
+#include "boost/random.hpp"
+#include <ctime>
 
 SimpleMove::SimpleMove(BaseTank *tank) : ITankMoveable(tank)
 {
@@ -50,12 +53,31 @@ void SimpleMove::move(size_t newDirection)
         break;
     }
 
-    int counter = 0;
+    size_t cheked = tank->checkPosition();
+    static int i = 0;
+    const int rangeMin = 0;
+    const int rangeMax = 1;
+    typedef boost::uniform_int<> NumberDistribution;
+    typedef boost::mt19937 RandomNumberGenerator;
+    typedef boost::variate_generator<RandomNumberGenerator&,
+                                     NumberDistribution> Generator;
 
-    if (tank->checkPosition()) {
-        if (tank->checkPosition())
-            qDebug() << tank->checkPosition();
+    NumberDistribution distribution(rangeMin, rangeMax);
+    RandomNumberGenerator generator;
+    Generator numberGenerator(generator, distribution);
+    generator.seed(std::time(0)+i++);
+
+    if (cheked) {
         tank->setPos(tank->x() + tank->rect().width()*dx, tank->y() + tank->rect().height()*dy);
-        counter++;
+        if (cheked == 2) {
+            ITankMoveable* newMove = NULL;
+            if (numberGenerator())
+                newMove = new SuperMove(tank);
+            else
+                newMove = new NoMove(tank);
+
+            tank->setMoveable(newMove);
+            delete this;
+        }
     }
 }

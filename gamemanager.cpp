@@ -73,11 +73,11 @@ GameManager::GameManager(char* str){
              if ( matrixField[i+j*w] == 9)
              {
                  matrixField[i+j*w] = 0;
-                 //ePlayer = (EnemyTank*)TankFactory::createTank(ePl);
-                 //ePlayer->setRect(0, 0, 50, 50);
-                 //enemyPlayers.push_back(ePlayer);
-                 //scene->addItem(ePlayer);
-                 //ePlayer->setPos(i*ElementSize,j*ElementSize);
+                 ePlayer = (EnemyTank*)TankFactory::createTank(ePl);
+                 ePlayer->setRect(0, 0, 50, 50);
+                 enemyPlayers.push_back(ePlayer);
+                 scene->addItem(ePlayer);
+                 ePlayer->setPos(i*ElementSize,j*ElementSize);
              }
          }
     field = new Field(w,h,matrixField);

@@ -30,14 +30,8 @@ size_t BaseTank::getDirection() const
     return this->direction;
 }
 
-void BaseTank::setDirection(size_t newDirection)
-{
-    this->direction = newDirection;
-}
-
 void BaseTank::setMoveable(ITankMoveable *newMoveable)
 {
-    delete moveable;
     moveable = newMoveable;
 }
 

@@ -25,11 +25,11 @@ SOURCES += main.cpp\
     orel.cpp \
     bonus.cpp \
     itankmoveable.cpp \
-    objects.cpp \
     simplemove.cpp \
     enemytank.cpp \
     nomove.cpp \
-    tankfactory.cpp
+    tankfactory.cpp \
+    supermove.cpp
 
 HEADERS  += mainwindow.h \
     field.h \
@@ -43,11 +43,11 @@ HEADERS  += mainwindow.h \
     orel.h \
     bonus.h \
     itankmoveable.h \
-    objects.h \
     simplemove.h \
     enemytank.h \
     nomove.h \
-    tankfactory.h
+    tankfactory.h \
+    supermove.h
 
 FORMS    += mainwindow.ui
 

@@ -5,11 +5,11 @@
 #include <QObject>
 #include <basic_element.h>
 #define ELEMENT 50
-#include <QDebug>
+
 class OrelField: public QObject, public BasicElement{
     Q_OBJECT
 public:
-    void info() {qDebug() << "OREL!";}
+    void info() {}
     OrelField(int i, int j);
 };
 

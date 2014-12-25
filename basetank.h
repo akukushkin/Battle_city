@@ -20,14 +20,16 @@ public:
     virtual ~BaseTank();
 
     size_t getDirection() const;
-    void setDirection(size_t newDirection);
-    void setMoveable(ITankMoveable *newMoveable);
-
     void rotateTank(size_t newDirection);
     void shot();
+    // Return type cell
     size_t checkPosition();
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
+public slots:
+    void setMoveable(ITankMoveable *newMoveable);
+
 protected:
     size_t direction;
     qreal speed;
