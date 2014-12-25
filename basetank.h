@@ -20,22 +20,23 @@ public:
     virtual ~BaseTank();
 
     size_t getDirection() const;
-    void setDirection(size_t new_direction);
+    void setDirection(size_t newDirection);
+    void setMoveable(ITankMoveable *newMoveable);
 
     void rotateTank(size_t newDirection);
     void shot();
-    bool checkPosition();
+    size_t checkPosition();
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 protected:
     size_t direction;
     qreal speed;
 
-    // Interface for moving tank. Pattern strategy
+    // Interface for moving tank. Pattern state
     ITankMoveable* moveable;
 
     // Moving tank
-    void move(int direction);
+    void move(size_t direction);
 };
 
 #endif // BASETANK_H

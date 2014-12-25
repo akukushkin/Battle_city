@@ -48,10 +48,10 @@ Field::~Field()
     }
 }
 
-int Field::check(int m, int k)
+size_t Field::check(int m, int k)
 {
     if (matrixField[k+m*w] != 0){
-        if (matrixField[k+m*w] == 8){
+        if (matrixField[k+m*w] == 8) {
             destroy(m,k);
             return 2;
         }
@@ -63,11 +63,9 @@ int Field::check(int m, int k)
 
 void Field::destroy(BasicElement* element)
 {
-    qDebug() << element;
     for(int i = 0 ; i < h; i++)
         for (int j = 0; j < w; j++){
-            if (matrix[i+j*w] == element){  
-                qDebug() << i << j;
+            if (matrix[i+j*w] == element){
                 scene->removeItem(matrix[i+j*w]);
                 delete matrix[i+j*w];
                 matrix[i+j*w]=NULL;

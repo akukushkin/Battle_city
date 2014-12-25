@@ -11,7 +11,7 @@ public:
     explicit SimpleMove(BaseTank *tank = NULL);
     ~SimpleMove();
 
-    void move(int newDirection);
+    void move(size_t newDirection);
 };
 
 #endif // SIMPLEMOVE_H

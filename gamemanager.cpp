@@ -60,7 +60,6 @@ GameManager::GameManager(char* str){
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->show();
-    field = new Field(w,h,matrixField);
     playerTank = (Tank*)TankFactory::createTank(hPl);
     playerTank->setRect(0, 0, 50, 50);
     scene->addItem(playerTank);
@@ -74,13 +73,14 @@ GameManager::GameManager(char* str){
              if ( matrixField[i+j*w] == 9)
              {
                  matrixField[i+j*w] = 0;
-                 ePlayer = (EnemyTank*)TankFactory::createTank(ePl);
-                 ePlayer->setRect(0, 0, 50, 50);
-                 enemyPlayers.push_back(ePlayer);
-                 scene->addItem(ePlayer);
-                 ePlayer->setPos(i*ElementSize,j*ElementSize);
+                 //ePlayer = (EnemyTank*)TankFactory::createTank(ePl);
+                 //ePlayer->setRect(0, 0, 50, 50);
+                 //enemyPlayers.push_back(ePlayer);
+                 //scene->addItem(ePlayer);
+                 //ePlayer->setPos(i*ElementSize,j*ElementSize);
              }
          }
+    field = new Field(w,h,matrixField);
 }
 
 GameManager::~GameManager() {
@@ -99,7 +99,15 @@ GameManager::~GameManager() {
     }
 }
 
-void GameManager::destroyEnemyTank(BaseTank *)
+void GameManager::destroyEnemyTank(BaseTank* deleteTank)
 {
+    for(size_t i = 0; i < enemyPlayers.size();i++)
+        if (enemyPlayers[i] == deleteTank){
+            delete enemyPlayers[i];
+            enemyPlayers.erase(enemyPlayers.begin() + i);
+            if (enemyPlayers.empty()){
+                delete this;
+            }
+        }
     return;
 }

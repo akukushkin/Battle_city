@@ -11,7 +11,7 @@ public:
     explicit ITankMoveable(BaseTank* tank = NULL);
     virtual ~ITankMoveable();
 
-    void virtual move(int newDirection) = 0;
+    void virtual move(size_t newDirection) = 0;
 protected:
     BaseTank* tank;
 };

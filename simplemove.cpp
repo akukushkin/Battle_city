@@ -1,4 +1,5 @@
 #include "simplemove.h"
+#include <QDebug>
 
 SimpleMove::SimpleMove(BaseTank *tank) : ITankMoveable(tank)
 {
@@ -8,7 +9,7 @@ SimpleMove::~SimpleMove()
 {
 }
 
-void SimpleMove::move(int newDirection)
+void SimpleMove::move(size_t newDirection)
 {
     int dx = 0;
     int dy = 0;
@@ -52,6 +53,8 @@ void SimpleMove::move(int newDirection)
     int counter = 0;
 
     if (tank->checkPosition()) {
+        if (tank->checkPosition())
+            qDebug() << tank->checkPosition();
         tank->setPos(tank->x() + tank->rect().width()*dx, tank->y() + tank->rect().height()*dy);
         counter++;
     }

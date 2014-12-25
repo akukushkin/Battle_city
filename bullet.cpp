@@ -45,6 +45,8 @@ void Bullet::move()
             scene()->removeItem(this);
             delete this;
             return;
+        } else if(typeid(*(colliding_items[i])) == typeid(Tank)){
+            delete game;
         }
     }
 

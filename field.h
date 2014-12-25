@@ -15,7 +15,7 @@ private:
 public:
     Field(int,int,std::vector<int>);
     ~Field();
-    int check(int m,int k);
+    size_t check(int m,int k);
     void destroy(BasicElement* element);
     void destroy(int i, int j);
 signals:

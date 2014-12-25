@@ -6,7 +6,6 @@
 #include <QObject>
 #include "basetank.h"
 
-
 class Tank : public BaseTank
 {
     Q_OBJECT
