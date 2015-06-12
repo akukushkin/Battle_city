@@ -57,3 +57,6 @@ RESOURCES += \
     res.qrc
 
 unix|win32: LIBS += -ltinyxml
+
+OTHER_FILES += \
+    discription.txt

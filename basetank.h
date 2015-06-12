@@ -9,8 +9,6 @@
 #include "bullet.h"
 #include "itankmoveable.h"
 
-class ITankMoveable;
-
 class BaseTank : public QObject, public QGraphicsRectItem
 {
     Q_OBJECT

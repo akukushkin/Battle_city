@@ -1,5 +1,6 @@
 #ifndef TANKFACTORY_H
 #define TANKFACTORY_H
+
 #include <basetank.h>
 
 enum TID {hPl, ePl};
