@@ -1,0 +1,78 @@
+Structure programm:
+class BaseTank - base class for player's and enemy's tanks.
+    BaseTank(size_t x, size_t y) - create tank and set position (x; y);
+    size_t getDirection() const - get current tank's direction;
+    void rotateTank(size_t newDirection) - rotate tank;
+    void shot() - shot tank;
+    size_t checkPosition() - get type of cell;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) - paint tank;
+    void setMoveable(ITankMoveable *newMoveable) - set moveable tank;
+    void move(size_t direction) - move tank.
+
+class Tank - class of player's tank.
+    void keyPressEvent(QKeyEvent *event) - key press moving tank.
+
+class EnemyTank - class of enemy's tank.
+    QTimer* enemyTimer - for moving tank;
+    explicit EnemyTank(size_t x, size_t y) - create enemy's tank and set position (x; y);
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) - print tank;
+    void randomMove() - algorithm for enemy's tank moving.
+
+class BasicElement - base class for every type of cell.
+    virtual void info() = 0 - print in debug type of cell;
+    static BasicElement* createElement(BasicElement_ID id,int i, int j) - create element in (i; j).
+
+class Field - class of field.
+    std::vector<BasicElement*> matrix - presentation field in game;
+    std::vector<int> matrixField - presentation field in game;
+    int w - width game field;
+    int h - height game field;
+    Field(int _w, int _h, std::vector<int> mtr) - create field _w * _h;
+    size_t check(int m,int k) - get type of cell in (m; k);
+    void destroy(BasicElement* element) - destroy element on field;
+    void destroy(int i, int j) - destroy element on field;
+    obj_delete() - for deleting element.
+
+class KirpichField - class of kirpich field.
+    KirpichField(int i, int j) - create kirpich (i; j).
+
+class MetallField - class of metall
+    MetallField(int i, int j) - create metall (i; j).
+
+class OrelField - class of orel field.
+    OrelField(int i, int j) - create orel (i; j).
+
+class BonusField - class of bonus field.
+    BonusField(int i, int j) - create bonus field in (i; j).
+
+class Bullet - class of bullet.
+    QTimer* timer - for flying bullet;
+    Bullet(size_t _direction) - create bullet with direction;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) - print bullet;
+    void move() - move bullet.
+
+class GameManager - class of GM.
+    Field* field - game field;
+    Tank* playerTank - player's tank;
+    std::vector<EnemyTank*> enemyPlayers - vector tanks of enemies;
+    BonusField* bonus - bonuses;
+    Field* callField() - get Field object;
+    Tank* callPlayerTank() - get player's tank;
+    BonusField* callBonus() - get bonuses;
+    GameManager(char* str) - create GM and load map from file with name str;
+    void destroyEnemyTank(BaseTank*) - destroy enemy's tank.
+
+class TankFactory - pattern fabric method.
+    static BaseTank* createTank(TID tank_id) - create a different type of tank.
+
+class ITankMoveable - interface of tank's moveable.
+    move(size_t newDirection) - move tank.
+
+class SimpleMove - simple move implementation ITankMoveable.
+    void move(size_t newDirection) - move tank.
+
+class SuperMove - super move implementation ITankMoveable.
+    void move(size_t newDirection) - move tank.
+
+class NoMove - nomove implementation ITankMoveable.
+    void move(size_t newDirection) - move tank.
